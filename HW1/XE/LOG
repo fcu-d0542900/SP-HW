@@ -1,0 +1,23 @@
+SIC SIMULATOR V1.6
+
+COMMAND: S(tart, R(un, E(nter, D(ump, H(count, B(kpt, Q(uit?
+S
+
+COMMAND: S(tart, R(un, E(nter, D(ump, H(count, B(kpt, Q(uit?
+B 203D
+
+COMMAND: S(tart, R(un, E(nter, D(ump, H(count, B(kpt, Q(uit?
+H 5000
+
+COMMAND: S(tart, R(un, E(nter, D(ump, H(count, B(kpt, Q(uit?
+R
+  5000 INSTRUCTIONS EXECUTED
+P=000030
+
+COMMAND: S(tart, R(un, E(nter, D(ump, H(count, B(kpt, Q(uit?
+R
+  5000 INSTRUCTIONS EXECUTED
+P=00001B
+
+COMMAND: S(tart, R(un, E(nter, D(ump, H(count, B(kpt, Q(uit?
+R
