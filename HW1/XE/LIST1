@@ -1,0 +1,39 @@
+
+ SIC/XE Assembler Version 1.00
+ Public Domain 1993 by LBL, Keny, Ted
+
+ Line   Loc   ObjCode           Source Line
+ ----  ----  --------  -----------------------------
+    1  2000            HW1XE    START   2000
+    2  2000  6D0007    FIRST    LDS     #7
+    3  2003  010002             LDA     #2
+    4  2006  9040               ADDR    S,A
+    5  2008  0F2033             STA     CC
+    6  200B  1D0003             SUB     #3
+    7  200E  0F2030             STA     EE
+    8  2011  210002             MUL     #2
+    9  2014  0F202D             STA     FF
+   10                  .
+   11  2017  032027             LDA     EE
+   12  201A  250002             DIV     #2
+   13  201D  0F2027             STA     GG
+   14  2020  210003             MUL     #3
+   15  2023  0F2024             STA     HH
+   16  2026  010000             LDA     #0
+   17  2029  0F2021             STA     II 
+   18  202C  032015             LDA     FF
+   19  202F  2B2018             COMP    HH
+   20  2032  372000             JGT     IF
+   21                  .
+   22  2035  03200F    IF       LDA     GG
+   23  2038  650006             DIVF    #6
+   24  203B  0F200F             STA     II
+   25                  . 
+   26                  . 
+   27  203E            CC       RESW    1
+   28  2041            EE       RESW    1
+   29  2044            FF       RESW    1
+   30  2047            GG       RESW    1
+   31  204A            HH       RESW    1
+   32  204D            II       RESW    2
+   33                           END     FIRST
