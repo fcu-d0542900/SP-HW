@@ -1,0 +1,31 @@
+SIC Assembler V1.2
+
+1000        HW2SIC   START   1000                                             
+1000 E01036 INLOOP   TD      INDEV                                            
+1003 301000 FIRST    JEQ     INLOOP                                           
+1006 D81036          RD      INDEV                                            
+1009 541037          STCH    NUM1                                             
+100C 54103A          STCH    NUM2                                             
+            .                                                                 
+100F 001037          LDA     NUM1                                             
+1012 0C1040          STA     SUM                                              
+1015 0C103D          STA     TEMP                                             
+1018 00103D ADDLP    LDA     TEMP                                             
+101B 181043          ADD     TWO                                              
+101E 0C103D          STA     TEMP                                             
+1021 181040          ADD     SUM                                              
+1024 0C1040          STA     SUM                                              
+1027 00103D          LDA     TEMP                                             
+102A 181043          ADD     TWO                                              
+102D 28103A          COMP    NUM2                                             
+1030 301018          JEQ     ADDLP                                            
+1033 381018          JLT     ADDLP                                            
+            .                                                                 
+            .                                                                 
+1036 F3     INDEV    BYTE    X'F3'                                            
+1037        NUM1     RESW    1                                                
+103A        NUM2     RESW    1                                                
+103D        TEMP     RESW    1                                                
+1040        SUM      RESW    1                                                
+1043 000002 TWO      WORD    2                                                
+1046                 END     FIRST                                            

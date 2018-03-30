@@ -20,9 +20,8 @@ FIRST    LDS     #7
          JGT     IF
 .
 IF       LDA     GG
-         FLOAT
-        +DIVF    #6
-         STF     II
+         DIVF    #6
+         STA     II
 . 
 . 
 CC       RESW    1
