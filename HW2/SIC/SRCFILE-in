@@ -1,9 +1,15 @@
-HW2XE    START   1000
-FIRST    LDA     NUM1
+HW2SIC   START   1000
+INLOOP   TD      INDEV
+FIRST    JEQ     INLOOP
+         RD      INDEV
+         STCH    NUM1
+         STCH    NUM2
+.
+         LDA     NUM1
          STA     SUM
          STA     TEMP
 ADDLP    LDA     TEMP
-         ADD     #2
+         ADD     TWO
          STA     TEMP
          ADD     SUM
          STA     SUM
@@ -14,8 +20,10 @@ ADDLP    LDA     TEMP
          JLT     ADDLP
 . 
 . 
-NUM1     WORD    15
-NUM2     WORD    37
+INDEV    BYTE    X'F3'
+NUM1     RESW    1
+NUM2     RESW    1
 TEMP     RESW    1
 SUM      RESW    1
+TWO      WORD    2
          END     FIRST

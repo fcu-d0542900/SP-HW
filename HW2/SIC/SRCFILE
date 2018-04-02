@@ -1,11 +1,5 @@
 HW2SIC   START   1000
-INLOOP   TD      INDEV
-FIRST    JEQ     INLOOP
-         RD      INDEV
-         STCH    NUM1
-         STCH    NUM2
-.
-         LDA     NUM1
+FIRST    LDA     NUM1
          STA     SUM
          STA     TEMP
 ADDLP    LDA     TEMP
@@ -20,9 +14,8 @@ ADDLP    LDA     TEMP
          JLT     ADDLP
 . 
 . 
-INDEV    BYTE    X'F3'
-NUM1     RESW    1
-NUM2     RESW    1
+NUM1     WORD    15
+NUM2     WORD    37
 TEMP     RESW    1
 SUM      RESW    1
 TWO      WORD    2
