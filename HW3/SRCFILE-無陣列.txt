@@ -1,0 +1,60 @@
+HW3SIC   START   1000
+FIRST    LDA     ZERO
+         STA     ANS
+         STA     ANSG
+         STA     ANSL
+         J       LCM
+.
+GCD      J       COM
+GETGCD   LDA     NUM1
+         DIV     NUM2
+         MUL     NUM2
+         STA     TEMP
+         LDA     NUM1
+         SUB     TEMP
+         STA     NUM1
+         COMP    ZERO
+         JEQ     ANSGCD
+         J       COM
+ANSGCD   LDA     NUM2
+         STA     ANSG
+.
+LCM      J       GCD
+         LDA     ANSG
+         STA     ANS
+         LDA     NUM1
+         DIV     ANSG
+         MUL     ANS
+         STA     ANS
+         LDA     NUM2
+         DIV     ANSG
+         MUL     ANS
+         STA     ANSL
+.
+COM      LDA     NUM1
+         COMP    NUM2
+         JEQ     EQU
+         JGT     GETGCD
+         JLT     CHANGE
+.        
+EQU      LDA     NUM1
+         STA     ANS
+         J       ANSG
+.
+CHANGE   LDA     NUM1
+         STA     TEMP
+         LDA     NUM2
+         STA     NUM1
+         LDA     TEMP
+         STA     NUM2
+         J       GCD
+. 
+. 
+NUM1     WORD    15
+NUM2     WORD    30
+TEMP     RESW    1
+ANS      RESW    1
+ANSG     RESW    1
+ANSL     RESW    1
+ZERO     WORD    0
+         END     FIRST

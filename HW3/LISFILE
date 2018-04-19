@@ -1,0 +1,104 @@
+SIC Assembler V1.2
+
+1000        HW3SIC   START   1000                                             
+1000 3C104B GCD      J       COM                                              
+1003 001078 GETGCD   LDA     NUM1                                             
+1006 24107B          DIV     NUM2                                             
+1009 20107B          MUL     NUM2                                             
+100C 0C107E          STA     TEMP                                             
+100F 001078          LDA     NUM1                                             
+1012 1C107E          SUB     TEMP                                             
+1015 0C1078          STA     NUM1                                             
+1018 281090          COMP    ZERO                                             
+101B 301021          JEQ     ANSGCD                                           
+101E 3C104B          J       COM                                              
+1021 00107B ANSGCD   LDA     NUM2                                             
+1024 0C108A          STA     ANSG                                             
+            .                                                                 
+1027 3C1000 LCM      J       GCD                                              
+102A 00108A          LDA     ANSG                                             
+102D 0C1087          STA     ANST                                             
+1030 001078          LDA     NUM1                                             
+1033 24108A          DIV     ANSG                                             
+1036 201087          MUL     ANST                                             
+1039 0C1087          STA     ANST                                             
+103C 00107B          LDA     NUM2                                             
+103F 24108A          DIV     ANSG                                             
+1042 201087          MUL     ANST                                             
+1045 0C108D          STA     ANSL                                             
+1048 3C10FF          J       BLOOP                                            
+            .                                                                 
+104B 001078 COM      LDA     NUM1                                             
+104E 28107B          COMP    NUM2                                             
+1051 30105A          JEQ     EQU                                              
+1054 341003          JGT     GETGCD                                           
+1057 381063          JLT     CHANGE                                           
+            .                                                                 
+105A 001078 EQU      LDA     NUM1                                             
+105D 0C1087          STA     ANST                                             
+1060 3C108A          J       ANSG                                             
+            .                                                                 
+1063 001078 CHANGE   LDA     NUM1                                             
+1066 0C107E          STA     TEMP                                             
+1069 00107B          LDA     NUM2                                             
+106C 0C1078          STA     NUM1                                             
+106F 00107E          LDA     TEMP                                             
+1072 0C107B          STA     NUM2                                             
+1075 3C1000          J       GCD                                              
+            .                                                                 
+            .                                                                 
+1078        NUM1     RESW    1                                                
+107B        NUM2     RESW    1                                                
+107E        TEMP     RESW    1                                                
+1081        XLOOP    RESW    1                                                
+1084        XANS     RESW    1                                                
+1087        ANST     RESW    1                                                
+108A        ANSG     RESW    1                                                
+108D        ANSL     RESW    1                                                
+1090 000000 ZERO     WORD    0                                                
+1093 000003 THREE    WORD    3                                                
+1096 000006 SIX      WORD    6                                                
+1099 00001E THIRTY   WORD    30                                               
+            .                                                                 
+109C 00000F FIRST    WORD    15                                               
+109F 00001E SECOND   WORD    30                                               
+10A2 000022          WORD    34                                               
+10A5 000033          WORD    51                                               
+10A8 00003C          WORD    60                                               
+10AB 000015          WORD    21                                               
+10AE 0000C7          WORD    199                                              
+10B1 000063          WORD    99                                               
+10B4 00003F          WORD    63                                               
+10B7 00003F          WORD    63                                               
+10BA        ANS      RESW    10                                               
+            .                                                                 
+10D8 001090 MAIN     LDA     ZERO                                             
+10DB 041090          LDX     ZERO                                             
+10DE 0C1081          STA     XLOOP                                            
+10E1 0C1084          STA     XANS                                             
+10E4 0C10BA          STA     ANS                                              
+10E7 0C108A          STA     ANSG                                             
+10EA 0C108D          STA     ANSL                                             
+10ED 041081 LOOP     LDX     XLOOP                                            
+10F0 00909C          LDA     FIRST,X                                          
+10F3 0C1078          STA     NUM1                                             
+10F6 00909F          LDA     SECOND,X                                         
+10F9 0C107B          STA     NUM2                                             
+10FC 3C1027          J       LCM                                              
+10FF 00108A BLOOP    LDA     ANSG                                             
+1102 0C90BA          STA     ANS,X                                            
+1105 001084          LDA     XANS                                             
+1108 181093          ADD     THREE                                            
+110B 0C1084          STA     XANS                                             
+110E 041084          LDX     XANS                                             
+1111 00108D          LDA     ANSL                                             
+1114 0C90BA          STA     ANS,X                                            
+1117 001084          LDA     XANS                                             
+111A 181093          ADD     THREE                                            
+111D 0C1084          STA     XANS                                             
+1120 001081          LDA     XLOOP                                            
+1123 181096          ADD     SIX                                              
+1126 0C1081          STA     XLOOP                                            
+1129 281099          COMP    THIRTY                                           
+112C 3810ED          JLT     LOOP                                             
+112F                 END     MAIN                                             
