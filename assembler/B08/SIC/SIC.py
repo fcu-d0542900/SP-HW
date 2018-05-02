@@ -72,9 +72,10 @@ for code in sic:  #計算位址
 for code in sic:
     if code[2].find(',X') != -1:  #有X之OPCODE
         if code[2].split(',')[0] in op:
+            #切割至','前之OPCODE + 放入之位址第一位加8並轉成16進位 + 加入放入之位址後3位
             code.append(op[code[2].split(',')[0]][0]+hex(int(sym[code[3]][0])+8)[2:].upper()+sym[code[3]][1:])
     if code[2] in op:
-            code.append(op[code[2]][0]+sym[code[3]])
+            code.append(op[code[2]][0]+sym[code[3]]) #切割至','前之OPCODE + 加入放入之位址
     
     
 
