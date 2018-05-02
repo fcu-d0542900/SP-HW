@@ -24,18 +24,20 @@ srcfile=open(file)  #開檔
 lisfile=open(file.split('.')[0]+'_LISFILE.txt','w')
 objfile=open(file.split('.')[0]+'_OBJFILE.txt','w')
 
+print('\n輸入之SIC程式碼:')
 for line in srcfile:
+    print(line,end='')
     if('\t' in line):  #需增加錯誤行
         print('Tab error')
     else:
         sic.append([line[0:9].strip(),line[9:17].strip(),line[17:].strip()])  #分割儲存字串
-
-print(sic)
+print()
 
 for code in sic:  #計算位址
     if code[1]=='START':  #設定起始位置
         locctr=int(code[2],16)  #將16進位轉10進位
         code.insert(0,[locctr,str(hex(locctr))[2:].zfill(4).upper()])  #將位址(10&16進位)差在List最前方
+        code.append('')
         continue
     if code[0]=='.':  #省略註解行
         continue
@@ -43,6 +45,7 @@ for code in sic:  #計算位址
     if code[1].strip() and code[1]!='.':  #如果標籤不為空，儲存至SYMTAB 
         sym[code[1]]=code[0][1]
     if code[2]=='END':  #遇到END則結束
+        code.append(sym[code[3]].zfill(6))
         break
     elif code[2]=='WORD':  #直接寫出opcode並加在List最後面
         code.append(str(hex(int(code[3])))[2:].zfill(6).upper())  #轉換數字成16進位並補0
@@ -57,8 +60,10 @@ for code in sic:  #計算位址
         elif code[3][0]=='X':
             locctr+=math.ceil(len(code[3][2:-1])/2)  #math.ceil 無條件進位
     elif code[2]=='RESW':  
+        code.append('')
         locctr+=3*int(code[3])
     elif code[2]=='RESB':
+        code.append('')
         locctr+=int(code[3])
     elif code[2].find(',X') != -1:  #有X之OPCODE
             if code[2].split(',')[0] in op:  #切割至','前
@@ -68,7 +73,6 @@ for code in sic:  #計算位址
     else:
         print(code,'error')
 
-
 for code in sic:
     if code[2].find(',X') != -1:  #有X之OPCODE
         if code[2].split(',')[0] in op:
@@ -76,12 +80,26 @@ for code in sic:
             code.append(op[code[2].split(',')[0]][0]+hex(int(sym[code[3]][0])+8)[2:].upper()+sym[code[3]][1:])
     if code[2] in op:
             code.append(op[code[2]][0]+sym[code[3]]) #切割至','前之OPCODE + 加入放入之位址
-    
-    
 
+'''
 for code in sic:
-    lisfile.write()
     print(code)
+'''
+
+print('\n輸出之LISFILE: ')
+for code in sic:  #輸出LISFILE
+    if code[0]=='.':
+        lisfile.write(' '*12+'.\n')
+        print(' '*12+'.')
+    elif code[2]=='END':
+        lisfile.write('{0:<4}'.format(code[0][1])+' '*8+'{0:<9}{1:<8}{2}\n' .format(code[1],code[2],code[3]))
+        print('{0:<4}'.format(code[0][1])+' '*8+'{0:<9}{1:<8}{2}' .format(code[1],code[2],code[3]))
+
+    else:
+        lisfile.write('{0:<4} {1:<6} {2:<9}{3:<8}{4}\n' .format(code[0][1],code[4],code[1],code[2],code[3]))
+        print('{0:<4} {1:<6} {2:<9}{3:<8}{4}' .format(code[0][1],code[4],code[1],code[2],code[3]))
+        
+print('\n輸出之OBJFILE: ')
 
 
 srcfile.close()

@@ -1,0 +1,38 @@
+2000        HW1SIC   START   2000
+2000 00203C FIRST    LDA     AA
+2003 18A03F          ADD,X   BB
+2006 0CA042          STA,X   CC
+2009 1C2045          SUB     DD
+200C 0C2048          STA     EE
+200F 20203C          MUL     AA
+2012 0C204B          STA     FF
+            .
+2015 002048          LDA     EE
+2018 24203C          DIV     AA
+201B 0C204E          STA     GG
+201E 202057          MUL     THREE
+2021 0C2051          STA     HH
+2024 00205D          LDA     ZERO
+2027 0C2054          STA     II
+202A 00204B          LDA     FF
+202D 282051          COMP    HH
+2030 342033          JGT     IF
+            .
+2033 00204E IF       LDA     GG
+2036 24205A          DIV     SIX
+2039 0C2054          STA     II
+            .
+            .
+203C 000002 AA       WORD    2
+203F 000007 BB       WORD    7
+2042        CC       RESW    1
+2045 000003 DD       WORD    3
+2048        EE       RESW    1
+204B        FF       RESW    1
+204E        GG       RESW    1
+2051        HH       RESW    1
+2054        II       RESW    1
+2057 000003 THREE    WORD    3
+205A 000006 SIX      WORD    6
+205D 000000 ZERO     WORD    0
+2060                 END     FIRST
