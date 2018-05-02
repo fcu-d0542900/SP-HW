@@ -80,6 +80,7 @@ for code in sic:
     
 
 for code in sic:
+    lisfile.write()
     print(code)
 
 
