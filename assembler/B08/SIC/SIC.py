@@ -15,8 +15,8 @@ op={'ADD':['18',3],'AND':['40',3],'COMP':['28',3],'DIV':['24',3],'FIX':['C4',1],
 sym={}  #SYMTAB
 locctr=0
 
-#file=input('輸入檔案名稱(SIC.txt): ')
-file='SIC.txt'
+file=input('輸入檔案名稱(SIC.txt): ')
+#file='SIC.txt'
 srcfile=open(file)  #開檔
 lisfile=open(file.split('.')[0]+'_LISFILE.txt','w')
 objfile=open(file.split('.')[0]+'_OBJFILE.txt','w')
