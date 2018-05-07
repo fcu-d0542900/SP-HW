@@ -73,9 +73,11 @@ for code in sic:  #計算位址
     elif code[2] in op:
         locctr+=op[code[2]][1]
     else:
-        print(code,'error')
+        print(' ****Wrong OPCODE !')
+        lisfile.write(' ****Wrong OPCODE !\n')
+        sys.exit('Wrong OPCODE !')
 
-for code in sic:
+for code in sic:  #產生object code
     if code[0]=='.':  #省略註解行
         continue
     if code[2].find(',X') != -1:  #有X之OPCODE

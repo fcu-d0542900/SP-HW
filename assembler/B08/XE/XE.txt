@@ -1,0 +1,33 @@
+HW1XE    START   2000
+FIRST    LDS     #7
+         LDA     #2
+         ADDR    S,A
+         STA     CC
+         SUB     #3
+         STA     EE
+         MUL     #2
+         STA     FF
+.
+         LDA     EE
+         DIV     #2
+         STA     GG
+         MUL     #3
+         STA     HH
+         LDA     #0
+         STA     II 
+         LDA     FF
+         COMP    HH
+         JGT     IF
+.
+IF       LDA     GG
+        +DIVF    #6
+         STF     II
+. 
+. 
+CC       RESW    1
+EE       RESW    1
+FF       RESW    1
+GG       RESW    1
+HH       RESW    1
+II       RESW    2
+         END     FIRST
