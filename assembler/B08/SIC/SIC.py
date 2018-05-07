@@ -32,6 +32,7 @@ for line in srcfile:
     else:
         sic.append([line[0:9].strip(),line[9:17].strip(),line[17:].strip()])  #分割儲存字串
 print()
+#print(sic)
 
 for code in sic:  #計算位址
     if code[1]=='START':  #設定起始位置
@@ -94,14 +95,43 @@ for code in sic:  #輸出LISFILE
     elif code[2]=='END':
         lisfile.write('{0:<4}'.format(code[0][1])+' '*8+'{0:<9}{1:<8}{2}\n' .format(code[1],code[2],code[3]))
         print('{0:<4}'.format(code[0][1])+' '*8+'{0:<9}{1:<8}{2}' .format(code[1],code[2],code[3]))
-
     else:
         lisfile.write('{0:<4} {1:<6} {2:<9}{3:<8}{4}\n' .format(code[0][1],code[4],code[1],code[2],code[3]))
         print('{0:<4} {1:<6} {2:<9}{3:<8}{4}' .format(code[0][1],code[4],code[1],code[2],code[3]))
         
 print('\n輸出之OBJFILE: ')
+length=str(hex(sic[-1][0][0]-sic[0][0][0]))[2:].zfill(6).upper()
+print('H'+'{0:<6}'.format(sic[0][1])+sic[0][3].zfill(6)+length)
+objfile.write('H'+'{0:<6}'.format(sic[0][1])+sic[0][3].zfill(6)+length)
 
-
+objf=[]
+l=-1
+t=''
+for i,code in enumerate(sic):
+    if code[0]=='.' or code[4]=='':  #省略註解行 及 RESW RESB
+        continue
+    if l==-2:
+        print('E'+sym[code[3]].zfill(6))
+        break
+    elif l==-1:
+        print('T'+code[0][1].zfill(6),end='')
+        t+=code[4]
+        l+=1+math.ceil(len(code[4])/2)
+    elif sic[i+1][2]=='END':
+        print(str(hex(l))[2:].zfill(2).upper()+t)
+        l=-2
+    elif l<=30:
+        l+=math.ceil(len(code[4])/2)
+        t+=code[4]
+        while sic[i+1][0]=='.':
+            i=i+1
+        if math.ceil(len(sic[i+1][4])/2)+l>30 or sic[i+1][4]=='':
+            print(str(hex(l))[2:].zfill(2).upper()+t)
+            t=''
+            l=-1
+           
+            
+ 
 srcfile.close()
 lisfile.close()
 objfile.close()
