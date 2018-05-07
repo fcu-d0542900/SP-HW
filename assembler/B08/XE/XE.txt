@@ -20,7 +20,7 @@ FIRST    LDS     #7
          JGT     IF
 .
 IF       LDA     GG
-        +DIVF    #6
+        +DIV     #6
          STF     II
 . 
 . 
