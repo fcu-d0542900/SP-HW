@@ -1,0 +1,41 @@
+1000        HW2      START   1000
+1000 001069 FIRST    LDA     ZERO
+1003 0C1072          STA     SUM
+1006 00105D          LDA     NUM1
+1009 241066          DIV     TWO
+100C 201066          MUL     TWO
+100F 0C106C          STA     INT
+1012 00105D          LDA     NUM1
+1015 1C106C          SUB     INT
+1018 0C106F          STA     REM
+101B 00106F          LDA     REM
+101E 281063          COMP    ONE
+1021 381027          JLT     EVEN
+1024 3C1042          J       ODD
+1027 001072 EVEN     LDA     SUM
+102A 18105D          ADD     NUM1
+102D 0C1072          STA     SUM
+1030 00105D          LDA     NUM1
+1033 181066          ADD     TWO
+1036 0C105D          STA     NUM1
+1039 281060          COMP    NUM2
+103C 341075          JGT     BREAK
+103F 3C1027          J       EVEN
+1042 001072 ODD      LDA     SUM
+1045 18105D          ADD     NUM1
+1048 0C1072          STA     SUM
+104B 00105D          LDA     NUM1
+104E 181066          ADD     TWO
+1051 0C105D          STA     NUM1
+1054 281060          COMP    NUM2
+1057 341075          JGT     BREAK
+105A 3C1042          J       ODD
+105D 000003 NUM1     WORD    3
+1060 00000A NUM2     WORD    10
+1063 000001 ONE      WORD    1
+1066 000002 TWO      WORD    2
+1069 000000 ZERO     WORD    0
+106C        INT      RESW    1
+106F        REM      RESW    1
+1072        SUM      RESW    1
+1075        BREAK    END     FIRST

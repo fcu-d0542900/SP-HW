@@ -9,18 +9,18 @@
             .
 2015 002048          LDA     EE
 2018 24203C          DIV     AA
-201B 0C204E          STA     GG
-201E 202057          MUL     THREE
-2021 0C2051          STA     HH
-2024 00205D          LDA     ZERO
-2027 0C2054          STA     II
+201B 0C2054          STA     GG
+201E 20205D          MUL     THREE
+2021 0C2057          STA     HH
+2024 002051          LDA     ZERO
+2027 0C205A          STA     II
 202A 00204B          LDA     FF
-202D 282051          COMP    HH
+202D 282057          COMP    HH
 2030 342033          JGT     IF
             .
-2033 00204E IF       LDA     GG
-2036 24205A          DIV     SIX
-2039 0C2054          STA     II
+2033 002054 IF       LDA     GG
+2036 24204E          DIV     SIX
+2039 0C205A          STA     II
             .
             .
 203C 000002 AA       WORD    2
@@ -29,10 +29,10 @@
 2045 000003 DD       WORD    3
 2048        EE       RESW    1
 204B        FF       RESW    1
-204E        GG       RESW    1
-2051        HH       RESW    1
-2054        II       RESW    1
-2057 000003 THREE    WORD    3
-205A 000006 SIX      WORD    6
-205D 000000 ZERO     WORD    0
+204E 000006 SIX      WORD    6
+2051 000000 ZERO     WORD    0
+2054        GG       RESW    1
+2057        HH       RESW    1
+205A        II       RESW    1
+205D 000003 THREE    WORD    3
 2060                 END     FIRST

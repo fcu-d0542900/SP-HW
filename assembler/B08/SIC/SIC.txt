@@ -29,10 +29,10 @@ CC       RESW    1
 DD       WORD    3
 EE       RESW    1
 FF       RESW    1
+SIX      WORD    6
+ZERO     WORD    0
 GG       RESW    1
 HH       RESW    1
 II       RESW    1
 THREE    WORD    3
-SIX      WORD    6
-ZERO     WORD    0
          END     FIRST
