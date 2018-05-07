@@ -2,7 +2,12 @@ SIC Assembler V1.2
 
 2000        HW1SIC   START   2000                                             
 2000 00203C FIRST    LDA     AA                                               
-2003 18203F          ADD     BB                                               
+2003        	 ADD     BB                                                      
+ **** illegal format in label field                     
+ **** missing operation code                            
+ **** illegal format in operation field                 
+ **** unrecognized operation code                       
+ **** missing or misplaced operand in instruction       
 2006 0C2042          STA     CC                                               
 2009 1C2045          SUB     DD                                               
 200C 0C2048          STA     EE                                               

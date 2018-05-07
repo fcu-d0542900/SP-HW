@@ -2,8 +2,9 @@ HW1SIC   START   2000                                             f8192
 HW1SIC  start 2000                                             f
 FIRST    LDA     AA                                               f8192
 FIRST   lda   AA                                               f
-         ADD     BB                                               f8195
-        add   BB                                               f
+	 ADD     BB                                                      f8195
+                                                               t
+tttffffffffffffffffffffff
          STA     CC                                               f8198
         sta   CC                                               f
          SUB     DD                                               f8201

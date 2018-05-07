@@ -6,7 +6,7 @@
 200C 0C2048          STA     EE
 200F 20203C          MUL     AA
 2012 0C204B          STA     FF
-            .
+            .µù¸Ñ
 2015 002048          LDA     EE
 2018 24203C          DIV     AA
 201B 0C2054          STA     GG

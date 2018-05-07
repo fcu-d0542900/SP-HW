@@ -1,6 +1,6 @@
 HW1SIC   START   2000
 FIRST    LDA     AA
-         ADD     BB
+	 ADD     BB
          STA     CC
          SUB     DD
          STA     EE

@@ -6,7 +6,7 @@ FIRST    LDA     AA
          STA     EE
          MUL     AA
          STA     FF
-.
+. µù¸Ñ
          LDA     EE
          DIV     AA
          STA     GG
