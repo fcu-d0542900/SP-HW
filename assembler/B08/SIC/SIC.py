@@ -106,7 +106,7 @@ for code in sic:  #輸出LISFILE
 print('\n輸出之OBJFILE: ')
 length=str(hex(sic[-1][0][0]-sic[0][0][0]))[2:].zfill(6).upper()  #計算總長度
 #輸出 H卡片
-print('H'+'{0:<6}'.format(sic[0][1])+sic[0][3].zfill(6)+length
+print('H'+'{0:<6}'.format(sic[0][1])+sic[0][3].zfill(6)+length)
 objfile.write('H'+'{0:<6}'.format(sic[0][1])+sic[0][3].zfill(6)+length+'\n')
 
 objf=[]
