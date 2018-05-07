@@ -89,17 +89,23 @@ for code in xe:  #產生object code
         continue
     if code[2].find('+') != -1:
         if code[2].find(',X') != -1:
-            code.append(hex(int(op[code[2].split('+')[1]][0],16)+3)[2:]+'9'+code[0][1].zfill(5))
+            code.append(hex(int(op[code[2].split('+')[1]][0],16)+3)[2:].zfill(2).upper()+'9'+code[0][1].zfill(5))
+        if code[3].find('#') != -1:
+            if 47<ord(code[3].split('#')[1][0])<58:
+                code.append(hex(int(op[code[2].split('+')[1]][0],16)+1)[2:].zfill(2).upper()+'1'+code[3].split('#')[1].zfill(5))
+            #標籤
         else:
-            code.append(hex(int(op[code[2].split('+')[1]][0],16)+3)[2:]+'1'+code[0][1].zfill(5))
+            code.append(hex(int(op[code[2].split('+')[1]][0],16)+3)[2:].zfill(2).upper()+'1'+code[0][1].zfill(5))
     if code[2].find(',X') != -1:  #有X之OPCODE
         if code[2].split(',')[0] in op:
             #切割至','前之OPCODE + 放入之位址第一位加8並轉成16進位 + 加入放入之位址後3位
             code.append(op[code[2].split(',')[0]][0]+hex(int(sym[code[3]][0])+8)[2:].upper()+sym[code[3]][1:])
     if code[2] in op:
         if code[3].find('#') != -1:
-            if 48<ord(code[2].split('#')[1])<57:
-                print(hex(int(op[code[2].split('+')[1]][0],16)+1)[2:]+'1'+code[3].split('#')[1].zfill(3))
+            if 47<ord(code[3].split('#')[1][0])<58:
+                code.append(hex(int(op[code[2]][0],16)+1)[2:].zfill(2).upper()+code[3].split('#')[1].zfill(4))
+            #標籤
+#        elif @
         elif op[code[2]][1]==2:
             print(code)
         else:
