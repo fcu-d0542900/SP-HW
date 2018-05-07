@@ -30,9 +30,8 @@ for line in srcfile:
         sys.exit('Tab error !')
     if '.' in line:
         sic.append(['.',line.split('.')[1].strip()])
-#        print(line.split('.')[1].sptrip())
     else:
-        sic.append([line[0:9].strip(),line[9:17].strip(),line[17:].strip()])  #分割儲存字串
+        sic.append([line[0:9].strip().upper(),line[9:17].strip().upper(),line[17:].strip().upper()])  #分割儲存字串
 print()
 #print(sic)
 
