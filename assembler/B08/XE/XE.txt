@@ -13,14 +13,14 @@ FIRST    LDS     #7
          STA     GG
          MUL     #3
          STA     HH
-         LDA     #0
+         LDA     @CC
          STA     II 
          LDA     FF
          COMP    HH
          JGT     IF
 .
 IF       LDA     GG
-        +DIV     #6
+        +DIV     #EE
          STF     II
 . 
 . 
