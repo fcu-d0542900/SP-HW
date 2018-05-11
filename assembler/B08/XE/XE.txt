@@ -1,6 +1,7 @@
 HW1XE    START   2000
 FIRST    LDS     #7
          LDA     #2
+         BASE    IF
          ADDR    S,A
          STA     CC
          SUB     #3
@@ -12,12 +13,13 @@ FIRST    LDS     #7
          DIV     #2
          STA     GG
          MUL     #3
-         STA     HH
+         STA     #HH
          LDA     @CC
          STA     II 
          LDA     FF
          COMP    HH
          JGT     IF
+         RESB    4096
 .
 IF       LDA     GG
         +DIV     #EE

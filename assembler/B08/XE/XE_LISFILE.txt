@@ -1,33 +1,35 @@
 2000          HW1XE    START   2000
 2000 6D0007   FIRST    LDS     #7
 2003 010002            LDA     #2
+                       BASE    IF
 2006 9040              ADDR    S,A
-2008 0F2034            STA     CC
+2008 0F400A            STA     CC
 200B 1D0003            SUB     #3
-200E 0F2031            STA     EE
+200E 0F400D            STA     EE
 2011 210002            MUL     #2
-2014 0F202E            STA     FF
+2014 0F4010            STA     FF
               .
-2017 032028            LDA     EE
+2017 03400D            LDA     EE
 201A 250002            DIV     #2
-201D 0F2028            STA     GG
+201D 0F4013            STA     GG
 2020 210003            MUL     #3
-2023 0F2025            STA     HH
-2026 022016            LDA     @CC
-2029 0F2022            STA     II
-202C 032016            LDA     FF
-202F 2B2019            COMP    HH
-2032 372000            JGT     IF
+2023 0D4016            STA     #HH
+2026 02400A            LDA     @CC
+2029 0F4019            STA     II
+202C 034010            LDA     FF
+202F 2B4016            COMP    HH
+2032 374000            JGT     IF
+2035                   RESB    4096
               .
-2035 032010   IF       LDA     GG
-2038 25102042          +DIV    #EE
-203C 83200F            STF     II
+3035 032010   IF       LDA     GG
+3038 25103042          +DIV    #EE
+303C 83200F            STF     II
               .
               .
-203F          CC       RESW    1
-2042          EE       RESW    1
-2045          FF       RESW    1
-2048          GG       RESW    1
-204B          HH       RESW    1
-204E          II       RESW    2
-2054                   END     FIRST
+303F          CC       RESW    1
+3042          EE       RESW    1
+3045          FF       RESW    1
+3048          GG       RESW    1
+304B          HH       RESW    1
+304E          II       RESW    2
+3054                   END     FIRST

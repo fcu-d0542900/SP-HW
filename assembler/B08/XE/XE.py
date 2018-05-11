@@ -45,6 +45,10 @@ print()
 for code in xe:  #計算位址
     if code[0]=='.':  #省略註解行
         continue
+    if code[1]=='BASE':
+        code.insert(0,'')
+        code.append('')
+        continue
     if code[1]=='START':  #設定起始位置
         locctr=int(code[2],16)  #將16進位轉10進位
         code.insert(0,[locctr,str(hex(locctr))[2:].zfill(4).upper()])  #將位址(10&16進位)差在List最前方
@@ -91,10 +95,11 @@ for i,code in enumerate(xe):  #產生object code
         continue
     if code[2]=='END':
         break
-    while xe[i+1][0]=='.':  #遇到註解行跳過
+    while xe[i+1][0]=='.' or xe[i+1][2]=='BASE':  #遇到註解行跳過
         i=i+1
     PC=xe[i+1][0][0]
-    if code[1]=='BASE':
+    if code[2]=='BASE':
+        print('AAAA')
         B=sym[code[3]]
     if code[2].find('+') != -1:  # e=1
         if code[2].find(',X') != -1:  # x=1，一般，ni=3，PC、B必=0
@@ -145,6 +150,9 @@ for code in xe:  #輸出LISFILE
     if code[0]=='.':  #顯示整行註解
         lisfile.write(' '*14+'.'+code[1]+'\n')
         print(' '*14+'.'+code[1])
+    elif code[2]=='BASE':
+        lisfile.write(' '*14+'{0:<9}{1:<8}{2}\n' .format(code[1],code[2],code[3]))
+        print(' '*14+'{0:<9}{1:<8}{2}' .format(code[1],code[2],code[3]))
     elif code[2]=='END':
         lisfile.write('{0:<4}'.format(code[0][1])+' '*10+'{0:<9}{1:<8}{2}\n' .format(code[1],code[2],code[3]))
         print('{0:<4}'.format(code[0][1])+' '*10+'{0:<9}{1:<8}{2}' .format(code[1],code[2],code[3]))
@@ -187,7 +195,7 @@ for i,code in enumerate(xe):
         t+=code[4]
     while xe[i+1][0]=='.':  #遇到註解行跳過
         i=i+1
-    if math.ceil(len(xe[i+1][4])/2)+l>30 or xe[i+1][4]=='':  #如果加入下行object code即超過30 or 下行object code為空 則換卡片
+    if xe[i+1][2]!='BASE' and (math.ceil(len(xe[i+1][4])/2)+l>30 or xe[i+1][4]==''):  #如果加入下行object code即超過30 or 下行object code為空 則換卡片
         objfile.write(str(hex(l))[2:].zfill(2).upper()+t+'\n')
         print(str(hex(l))[2:].zfill(2).upper()+t)
         t=''
