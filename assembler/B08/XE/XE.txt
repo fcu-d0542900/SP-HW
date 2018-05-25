@@ -26,7 +26,10 @@ IF       LDA     GG
          STF     II
 . 
 . 
-CC       RESW    1
+CC       RESW    5
+         ORG     CC
+         RESB    1
+         ORG
 EE       RESW    1
 FF       RESW    1
 GG       RESW    1
