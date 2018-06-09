@@ -23,8 +23,8 @@ sym={}  #SYMTAB
 M=[]  #M卡片
 locctr=0
 
-#file=input('輸入檔案名稱(XE.txt): ')
-file='XE.txt'
+file=input('輸入檔案名稱(XE.txt): ')
+#file='XE.txt'
 srcfile=open(file)  #開檔
 lisfile=open(file.split('.')[0]+'_LISFILE.txt','w')
 objfile=open(file.split('.')[0]+'_OBJFILE.txt','w')
@@ -33,9 +33,9 @@ print('\n輸入之SIC程式碼:')
 for line in srcfile:
     print(line,end='')
     if '\t' in line:  #需增加錯誤行
-        print(' ****Tab error !')
-        lisfile.write(' ****Tab error !\n')
-        sys.exit('Tab error !')
+        print(' ****Tab Error !')
+        lisfile.write(' ****Tab Error !\n')
+        sys.exit('Tab Error !')
     if '.' in line:
         xe.append(['.',line.split('.')[1].strip()])
     else:
@@ -45,13 +45,13 @@ print()
 for code in xe:  #計算位址
     if code[0]=='.':  #省略註解行
         continue
-    if code[1]=='BASE':
-        code.insert(0,'')
-        code.append('')
-        continue
     if code[1]=='START':  #設定起始位置
         locctr=int(code[2],16)  #將16進位轉10進位
         code.insert(0,[locctr,str(hex(locctr))[2:].zfill(4).upper()])  #將位址(10&16進位)差在List最前方
+        code.append('')
+        continue
+    if code[1]=='BASE':
+        code.insert(0,'')
         code.append('')
         continue
     if code[1]=='ORG':
@@ -61,7 +61,9 @@ for code in xe:  #計算位址
         elif code[2] == '':
             locctr=PC
         else:
-            print(' ****ORG error !')
+            print(' ****ORG Error !')
+            lisfile.write(' ****ORG Error !\n')
+            sys.exit('ORG Error !')
             break
         code.insert(0,'')
         code.append('')
@@ -83,6 +85,10 @@ for code in xe:  #計算位址
             code.append(c)
             locctr+=len(code[3][2:-1])
         elif code[3][0]=='X':
+            if len(code[3][2:-1])%2 ==1:
+                code.append(code[3][2:-1]+' ')
+            else:
+                code.append(code[3][2:-1])
             locctr+=math.ceil(len(code[3][2:-1])/2)  #math.ceil 無條件進位
     elif code[2]=='RESW':  
         code.append('')
@@ -139,14 +145,18 @@ for i,code in enumerate(xe):  #產生object code
                 elif -1 < sym[code[3].split('#')[1]]-B < 4096:  #減B
                     code.append(hex(int(op[code[2]][0],16)+1)[2:].zfill(2).upper()+'4'+hex(sym[code[3].split('#')[1]]-B)[2:].zfill(3).upper())
                 else:
-                    print('Relative Error!')
+                    print(' ****Relative Error!')
+                    lisfile.write(' ****Relative Error !\n')
+                    sys.exit('Relative Error !')
         elif code[3].find('@') != -1:  #間接模式
             if -2049 < sym[code[3].split('@')[1]]-PC < 2048:  #減PC
                 code.append(hex(int(op[code[2]][0],16)+2)[2:].zfill(2).upper()+'2'+hex(sym[code[3].split('@')[1]]-PC)[2:].zfill(3).upper())
             elif -1 < sym[code[3].split('@')[1]]-B < 4096:  #減B
                 code.append(hex(int(op[code[2]][0],16)+2)[2:].zfill(2).upper()+'4'+hex(sym[code[3].split('@')[1]]-B)[2:].zfill(3).upper())
             else:
-                print('Relative Error!')
+                print(' ****Relative Error!')
+                lisfile.write(' ****Relative Error !\n')
+                sys.exit('Relative Error !')
         elif op[code[2]][1]==2:  #format 2
             code.append(op[code[2]][0]+reg[code[3].split(',')[0]]+reg[code[3].split(',')[1]])
         else:  #一般，ni=3，減PC or B
@@ -155,7 +165,9 @@ for i,code in enumerate(xe):  #產生object code
             elif -1 < sym[code[3]]-B < 4096:  #減B
                 code.append(hex(int(op[code[2]][0],16)+3)[2:].zfill(2).upper()+'4'+hex(sym[code[3]]-B)[2:].zfill(3).upper())
             else:
-                print('Relative Error!')
+                print(' ****Relative Error!')
+                lisfile.write(' ****Relative Error !\n')
+                sys.exit('Relative Error !')
                 
 
 print('\n輸出之LISFILE: ')

@@ -5,34 +5,35 @@
 2006 9040              ADDR    S,A
 2008 0F400A            STA     CC
 200B 1D0003            SUB     #3
-200E 0F4019            STA     EE
+200E 0F401B            STA     EE
 2011 210002            MUL     #2
-2014 0F401C            STA     FF
+2014 0F401E            STA     FF
               .
-2017 034019            LDA     EE
+2017 03401B            LDA     EE
 201A 250002            DIV     #2
-201D 0F401F            STA     GG
+201D 0F4021            STA     GG
 2020 210003            MUL     #3
-2023 0D4022            STA     #HH
+2023 0D4024            STA     #HH
 2026 02400A            LDA     @CC
-2029 0F4025            STA     II
-202C 03401C            LDA     FF
-202F 2B4022            COMP    HH
+2029 0F4027            STA     II
+202C 03401E            LDA     FF
+202F 2B4024            COMP    HH
 2032 374000            JGT     IF
 2035                   RESB    4096
               .
-3035 03201C   IF       LDA     GG
-3038 2510304e          +DIV    #EE
-303C 83201B            STF     II
+3035 03201E   IF       LDA     GG
+3038 25103050          +DIV    #EE
+303C 83201D            STF     II
               .
               .
 303F          CC       RESW    5
+304E 123      EOF      BYTE    X'123'
                        ORG     CC
 303F                   RESB    1
                        ORG     
-304E          EE       RESW    1
-3051          FF       RESW    1
-3054          GG       RESW    1
-3057          HH       RESW    1
-305A          II       RESW    2
-3060                   END     FIRST
+3050          EE       RESW    1
+3053          FF       RESW    1
+3056          GG       RESW    1
+3059          HH       RESW    1
+305C          II       RESW    2
+3062                   END     FIRST

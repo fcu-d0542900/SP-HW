@@ -27,6 +27,7 @@ IF       LDA     GG
 . 
 . 
 CC       RESW    5
+EOF      BYTE    X'123'
          ORG     CC
          RESB    1
          ORG
